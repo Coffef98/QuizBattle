@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuizBattle
 {
-    internal class GameEngine
+    public class GameEngine
     {
         private List<Player> players;
         private int totalRounds;
