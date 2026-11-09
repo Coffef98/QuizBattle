@@ -64,16 +64,16 @@ namespace QuizBattle
                 return new List<Player>();
             }
 
-            int maxScore = Player.Max(p => p.Score);
+            int maxScore = players.Max(p => p.Score);
             var topScorers = players.Where(p => p.Score == maxScore).ToList();
 
             if (topScorers.Count > 1)
             {
-                int maxCoreeect = topScorers.Max(p => p.CorrectAnswersCount);
+                int maxCorrect = topScorers.Max(p => p.CorrectAnswersCount);
                 return topScorers.Where(p => p.CorrectAnswersCount == maxCorrect).ToList();
             }
 
-            ruturn topScorers;
+            return topScorers;
         }
     }
 }
