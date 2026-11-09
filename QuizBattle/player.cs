@@ -9,14 +9,14 @@ namespace QuizBattle
         public string Name { get; set; }
         public int Score { get; set; }
         public int CorrectAnswersCount { get; set; }
-        public int CurrenStreak { get; set; }
+        public int CurrentStreak { get; set; }
 
         public Player(string name)
         {
             Name = name;
             Score = 0;
             CorrectAnswersCount = 0;
-            CurrenStreak = 0;
+            CurrentStreak = 0;
         }
 
         public void AddCorrectAnswer(int basepoints)
@@ -24,10 +24,10 @@ namespace QuizBattle
             CorrectAnswersCount++;
             CurrentStreak++;
 
-            int bonusPoint = 0;
-            if (CurrenStreak > 1)
+            int bonusPoints = 0;
+            if (CurrentStreak > 1)
             {
-                bonuPoints = (CurrentStreak - 1) * 5;
+                bonusPoints = (CurrentStreak - 1) * 5;
                 if (bonusPoints > 20) bonusPoints = 20;
             }
 
@@ -37,7 +37,7 @@ namespace QuizBattle
 
         public void RegisterWrongAnswer()
         {
-            CurrenstStreak = 0;
+            CurrentStreak = 0;
         }
 
         public void ResetStats()
