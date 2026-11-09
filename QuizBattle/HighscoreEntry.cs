@@ -4,7 +4,11 @@ using System.Text;
 
 namespace QuizBattle
 {
-    internal class HighscoreEntry
+    public class HighscoreEntry
     {
+        public string Name { get; set; } = "";
+        public int Score { get; set; }
+        public int CorrectAnswerCount { get; set; }
+        public DateTime Date { get; set; }
     }
 }
