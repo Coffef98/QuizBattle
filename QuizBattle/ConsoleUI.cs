@@ -96,5 +96,61 @@
 
             return playerNames;
         }
+
+        public string ChooseCategory()
+        {
+            while (true)
+            {
+                Console.WriteLine("==== VÄLJ KATEGORI ====");
+                Console.WriteLine();
+
+
+
+                Console.WriteLine("4. Slumpa");
+                Console.WriteLine();
+                Console.WriteLine("Välj ett alternativ:");
+                if (int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    if (choice >= 1 && choice <= 4)
+                    {
+                        return choice.ToString();
+                    }
+                }
+                Console.WriteLine("Ogiltigt alternativ! Välj mellan 1 och 4.");
+
+            }
+        }
+
+        public void ShowRoundResult(Player player, int points, bool isCorrect, string correctAnswer)
+        {
+            Console.WriteLine("==== RESULTAT ====");
+
+            if (isCorrect == true)
+            {
+                Console.WriteLine("Rätt svar!");
+            }
+            else
+            {
+                Console.WriteLine("Fel svar!");
+            }
+
+            Console.WriteLine($"Spelare: {player.Name}");
+            Console.WriteLine($"Rätt svar: {correctAnswer}");
+            Console.WriteLine($"Poäng för frågan: +{points}");
+            Console.WriteLine($"Totala poäng: {player.Score}");
+        }
+
+        public void ShowWinners(List<Player> winners)
+        {
+            Console.WriteLine("===== QUIZ BATTLE - RESULTAT =====");
+
+            foreach (var winner in winners)
+            {
+                Console.WriteLine($"Vinnare: {winner.Name}");
+                Console.WriteLine($"Totala poäng: {winner.Score}");
+            }
+            
+            Console.WriteLine("Grattis till vinsten!");
+        }
     }
 }
