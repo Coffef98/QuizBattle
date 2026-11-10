@@ -1,0 +1,13 @@
+﻿# Visual Studio
+.vs/
+
+# Compiled files
+bin/
+obj/
+
+# User settings
+*.user
+*.suo
+
+# Temporary files
+*.tmp

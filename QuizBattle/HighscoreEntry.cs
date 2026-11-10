@@ -8,7 +8,7 @@ namespace QuizBattle
     {
         public string Name { get; set; } = "";
         public int Score { get; set; }
-        public int CorrectAnswerCount { get; set; }
+        public int CorrectAnswersCount { get; set; }
         public DateTime Date { get; set; }
     }
 }
