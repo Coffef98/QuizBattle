@@ -4,13 +4,13 @@ using System.Text;
 
 namespace QuizBattle
 {
-    public class GameEngine
+    public class GameManager
     {
         private List<Player> players;
         private int totalRounds;
         private int currentRound;
 
-        public GameEngine(List<Player> playerList, int rounds)
+        public GameManager(List<Player> playerList, int rounds)
         {
             players = playerList;
             totalRounds = rounds;
@@ -64,19 +64,52 @@ namespace QuizBattle
                 return new List<Player>();
             }
 
-            int maxScore = players.Max(p => p.Score);
-            var topScorers = players.Where(p => p.Score == maxScore).ToList();
+            int maxScore = -1;
+            foreach (var player in players)
+            {
+                 if(player.Score > maxScore)
+                 {
+                    maxScore = player.Score;
+                 }
+            }
+
+            List<Player> topScorers = new List<Player>();
+            foreach (var player in players)
+            {
+                if (player.Score == maxScore)
+                {
+                    topScorers.Add(player);
+                }
+            }
 
             if (topScorers.Count > 1)
             {
-                int maxCorrect = topScorers.Max(p => p.CorrectAnswersCount);
-                return topScorers.Where(p => p.CorrectAnswersCount == maxCorrect).ToList();
+                int maxCorrect = -1;
+                foreach (var player in topScorers)
+                {
+                    if (player.CorrectAnswersCount > maxCorrect)
+                    {
+                        maxCorrect = player.CorrectAnswersCount;
+                    }
+                }
+
+                List<Player> finalWinners = new List<Player>();
+                foreach (var player in topScorers)
+                {
+                    if (player.CorrectAnswersCount == maxCorrect)
+                    {
+                        finalWinners.Add(player);
+                    }
+                }
+                return finalWinners;
             }
 
             return topScorers;
         }
     }
 }
+
+
 
 
 
