@@ -11,27 +11,27 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 while (true)
 {
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("===== MagicTurtels QuizBattle ========");
-    Console.WriteLine();
-    Console.ResetColor();
+    //Console.ForegroundColor = ConsoleColor.Green;
+    //Console.WriteLine("===== MagicTurtels QuizBattle ========");
+    //Console.WriteLine();
+    //Console.ResetColor();
 
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.Write("1: Spela | ");
-    Console.ResetColor();
+    //Console.ForegroundColor = ConsoleColor.Yellow;
+    //Console.Write("1: Spela | ");
+    //Console.ResetColor();
 
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.Write("2: Highscore | ");
-    Console.ResetColor();
+    //Console.ForegroundColor = ConsoleColor.Cyan;
+    //Console.Write("2: Highscore | ");
+    //Console.ResetColor();
 
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.Write("3: Avsluta | ");
-    Console.ResetColor();
+    //Console.ForegroundColor = ConsoleColor.Red;
+    //Console.Write("3: Avsluta | ");
+    //Console.ResetColor();
 
-    Console.WriteLine();
-    Console.ForegroundColor = ConsoleColor.DarkCyan;
-    Console.Write("Ditt val 1-3: ");
-    Console.ResetColor();
+    //Console.WriteLine();
+    //Console.ForegroundColor = ConsoleColor.DarkCyan;
+    //Console.Write("Ditt val 1-3: ");
+    //Console.ResetColor();
 
     string choice = Console.ReadLine() ?? "";
 
