@@ -97,27 +97,83 @@
             return playerNames;
         }
 
-        public string ChooseCategory()
+        public string ChooseCategory(List<Category> categories)
         {
             while (true)
             {
                 Console.WriteLine("==== VÄLJ KATEGORI ====");
                 Console.WriteLine();
 
+                for (int i = 0; i < categories.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {categories[i].Name} ({categories[i].Questions.Count} frågor)");
+                }
 
-
-                Console.WriteLine("4. Slumpa");
+                Console.WriteLine($"{categories.Count + 1}. Slumpa");
                 Console.WriteLine();
                 Console.WriteLine("Välj ett alternativ:");
+
                 if (int.TryParse(Console.ReadLine(), out int choice))
                 {
-                    if (choice >= 1 && choice <= 4)
+                    if (choice >= 1 && choice <= categories.Count)
                     {
-                        return choice.ToString();
+                        return categories[choice - 1].Name;
+                    }
+
+                    if (choice == categories.Count + 1)
+                    {
+                        Random random = new Random();
+                        int randomIndex = random.Next(categories.Count);
+
+                        return categories[randomIndex].Name;
                     }
                 }
-                Console.WriteLine("Ogiltigt alternativ! Välj mellan 1 och 4.");
 
+                Console.WriteLine($"Ogiltigt alternativ! Välj mellan 1 och {categories.Count + 1}.");
+                Console.WriteLine();
+            }
+        }
+
+        public string GetAnswer(Question question)
+        {
+            Console.WriteLine("==== FRÅGA ====");
+            Console.WriteLine();
+            Console.WriteLine(question.Text);
+            Console.WriteLine();
+
+            if (question is MultipleChoiceQuestion multipleChoice)
+            {
+                for (int i = 0; i < multipleChoice.Options.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {multipleChoice.Options[i]}");
+                }
+            }
+            else if (question is TrueFalseQuestion)
+            {
+                Console.WriteLine("Svara med Sant eller Falskt:");
+            }
+            while (true)
+            {
+                string answer = (Console.ReadLine() ?? "").Trim();
+
+                if (question is MultipleChoiceQuestion multipleChoiceQuestion)
+                {
+                    if (int.TryParse(answer, out int choice) &&
+                        choice >= 1 && choice <= multipleChoiceQuestion.Options.Count)
+                    {
+                        return answer;
+                    }
+                }
+                else if (question is TrueFalseQuestion)
+                {
+                    if (answer.Equals("sant", StringComparison.OrdinalIgnoreCase) ||
+                        answer.Equals("falskt", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return answer;
+                    }
+                }
+
+                Console.WriteLine("Ogiltigt svar! Försök igen:");
             }
         }
 
