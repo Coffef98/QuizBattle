@@ -99,6 +99,11 @@
 
         public string ChooseCategory(List<Category> categories)
         {
+
+            if (categories.Count == 0)
+            {
+                return "";
+            }
             while (true)
             {
                 Console.WriteLine("==== VÄLJ KATEGORI ====");
