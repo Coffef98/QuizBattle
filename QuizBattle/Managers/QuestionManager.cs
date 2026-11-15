@@ -26,22 +26,22 @@ namespace QuizBattle
 
             foreach (JsonElement categoryElement in categories.EnumerateArray())
             {
-                string name = categoryElement.GetProperty("name").GetString();
+                string name = categoryElement.GetProperty("name").GetString()!;
                 Category category = new Category(name);
 
                 JsonElement questions = categoryElement.GetProperty("questions");
                 foreach (JsonElement q in questions.EnumerateArray())
                 {
-                    string text = q.GetProperty("text").GetString();
-                    string difficulty = q.GetProperty("difficulty").GetString();
-                    string type = q.GetProperty("type").GetString();
+                    string text = q.GetProperty("text").GetString()!;
+                    string difficulty = q.GetProperty("difficulty").GetString()!;
+                    string type = q.GetProperty("type").GetString()!;
 
                     if (type == "multipleChoice")
                     {
                         List<string> options = new List<string>();
                         foreach (JsonElement opt in q.GetProperty("options").EnumerateArray())
                         {
-                            options.Add(opt.GetString());
+                            options.Add(opt.GetString()!);
                         }
                         int correctIndex = q.GetProperty("correctIndex").GetInt32();
 
