@@ -1,4 +1,6 @@
-﻿namespace QuizBattle
+﻿using System.Threading.Channels;
+
+namespace QuizBattle
 {
     public class ConsoleUI
     {
@@ -14,11 +16,24 @@
                 Console.ResetColor();
 
                 Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("1. Spela");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("2. Topplista");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("3. Avsluta");
+                Console.ResetColor();
+
                 Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("Välj ett alternativ:");
+                Console.ResetColor();
 
                 if (int.TryParse(Console.ReadLine(), out int choice))
                 {
@@ -188,16 +203,31 @@
 
             if (isCorrect == true)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Rätt svar!");
+                Console.ResetColor();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fel svar!");
+                Console.ResetColor();
             }
 
             Console.WriteLine($"Spelare: {player.Name}");
-            Console.WriteLine($"Rätt svar: {correctAnswer}");
-            Console.WriteLine($"Poäng för frågan: +{points}");
+
+            Console.Write($"Rätt svar:");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write(correctAnswer);
+            Console.ResetColor();
+            Console.WriteLine();
+
+            
+            Console.Write($"Poäng för frågan: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write($"+{points}");
+            Console.ResetColor();
+            Console.WriteLine();
             Console.WriteLine($"Totala poäng: {player.Score}");
         }
 

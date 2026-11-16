@@ -18,7 +18,7 @@ namespace QuizBattle
             totalRounds = rounds;
             currentRound = 1;
             questionManager = new QuestionManager();
-            questionManager.LoadQuestions("data/questions.json");
+            questionManager.LoadQuestions(Path.Combine(AppContext.BaseDirectory, "data", "questions.json"));
         }
 
         public void StartGame()
@@ -52,11 +52,22 @@ namespace QuizBattle
 
         public void PlayRound()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\n=== round {currentRound} of {totalRounds} ===");
+            Console.ResetColor();
 
             foreach (var player in players)
             {
-                Console.WriteLine($"\nIt is {player.Name}'s to play.");
+
+                Console.Write("\nIt is ");
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write(player.Name);
+                Console.ResetColor();
+
+                Console.WriteLine("'s to play.");
+
+
                 ConsoleUI ui = new ConsoleUI();
                 string selectedCategory = ui.ChooseCategory(questionManager.Categories);
                 Category? category = questionManager.Categories
