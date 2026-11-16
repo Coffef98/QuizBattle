@@ -26,6 +26,12 @@ namespace QuizBattle
 
             while (currentRound <= totalRounds)
             {
+                if (questionManager.Categories.All(c => c.Questions.Count == 0))
+                {
+                    Console.WriteLine("Alla frågor är slut! Spelet avslutas.");
+                    break;
+                }
+
                 PlayRound();
                 currentRound++;
 
@@ -58,6 +64,12 @@ namespace QuizBattle
 
             foreach (var player in players)
             {
+
+                if (questionManager.Categories.All(c => c.Questions.Count == 0))
+                {
+                    Console.WriteLine("\nAlla frågor är slut!");
+                    break;
+                }
 
                 Console.Write("\nIt is ");
 

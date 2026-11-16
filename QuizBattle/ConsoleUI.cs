@@ -119,6 +119,13 @@ namespace QuizBattle
             {
                 return "";
             }
+
+            if (categories.All(c => c.Questions.Count == 0))
+            {
+                Console.WriteLine("Alla frågor är slut!");
+                return "";
+            }
+
             while (true)
             {
                 Console.WriteLine("==== VÄLJ KATEGORI ====");
@@ -137,15 +144,30 @@ namespace QuizBattle
                 {
                     if (choice >= 1 && choice <= categories.Count)
                     {
-                        return categories[choice - 1].Name;
+                        Category selected = categories[choice - 1];
+
+                        if (selected.Questions.Count == 0)
+                        {
+                            Console.WriteLine("Kategorin är tom! Välj en annan kategori.");
+                            continue;
+                        }
+                        return selected.Name;
                     }
 
                     if (choice == categories.Count + 1)
                     {
-                        Random random = new Random();
-                        int randomIndex = random.Next(categories.Count);
+                        List<Category> availableCategories = categories
+                            .Where(c => c.Questions.Count > 0)
+                            .ToList();
 
-                        return categories[randomIndex].Name;
+                        if (availableCategories.Count == 0)
+                        {
+                            return "";
+                        }
+
+                        Random random = new Random();
+                        int randomIndex = random.Next(availableCategories.Count);
+                        return availableCategories[randomIndex].Name;
                     }
                 }
 
