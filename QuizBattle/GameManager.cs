@@ -9,12 +9,16 @@ namespace QuizBattle
         private List<Player> players;
         private int totalRounds;
         private int currentRound;
+        private QuestionManager questionManager;
+
 
         public GameManager(List<Player> playerList, int rounds)
         {
             players = playerList;
             totalRounds = rounds;
             currentRound = 1;
+            questionManager = new QuestionManager();
+            questionManager.LoadQuestions("data/questions.json");
         }
 
         public void StartGame()
@@ -28,6 +32,22 @@ namespace QuizBattle
             }
 
             List<Player> winners = GetWinners();
+            ConsoleUI ui = new ConsoleUI();
+            ui.ShowWinners(winners);
+            HighscoreManager highscoreManager = new HighscoreManager();
+
+            foreach (Player player in players)
+            {
+                HighscoreEntry entry = new HighscoreEntry
+                {
+                    Name = player.Name,
+                    Score = player.Score,
+                    CorrectAnswersCount = player.CorrectAnswersCount,
+                    Date = DateTime.Now
+                };
+
+                highscoreManager.SaveResult(entry);
+            }
         }
 
         public void PlayRound()
@@ -37,6 +57,31 @@ namespace QuizBattle
             foreach (var player in players)
             {
                 Console.WriteLine($"\nIt is {player.Name}'s to play.");
+                ConsoleUI ui = new ConsoleUI();
+                string selectedCategory = ui.ChooseCategory(questionManager.Categories);
+                Category? category = questionManager.Categories
+                    .FirstOrDefault(c => c.Name == selectedCategory);
+
+                if (category == null)
+                {
+                    Console.WriteLine("Kategorin kunde inte hittas.");
+                    continue;
+                }
+                if (category.Questions.Count == 0)
+                {
+                    Console.WriteLine("Det finns inga frågor kvar i denna kategori.");
+                    continue;
+                }
+                Random random = new Random();
+                int randomIndex = random.Next(category.Questions.Count);
+                Question question = category.Questions[randomIndex];
+                string answer = ui.GetAnswer(question);
+                bool isCorrect = question.CheckAnswer(answer);
+                int basePoints = question.GetPoints();
+                int earnedPoints = CalculatePoints(player, basePoints, isCorrect);
+                string correctAnswer = question.GetCorrectAnswer();
+                ui.ShowRoundResult(player, earnedPoints, isCorrect, correctAnswer);
+                category.Questions.RemoveAt(randomIndex);
             }
         }
 
