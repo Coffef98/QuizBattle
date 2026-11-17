@@ -77,7 +77,7 @@ namespace QuizBattle
                 Console.Write(player.Name);
                 Console.ResetColor();
 
-                Console.WriteLine("tur att spela!");
+                Console.WriteLine("s tur att spela!");
 
 
                 ConsoleUI ui = new ConsoleUI();
