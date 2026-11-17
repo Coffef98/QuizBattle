@@ -71,13 +71,13 @@ namespace QuizBattle
                     break;
                 }
 
-                Console.Write("\nIt is ");
+                Console.Write("\nNu är det ");
 
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(player.Name);
                 Console.ResetColor();
 
-                Console.WriteLine("'s to play.");
+                Console.WriteLine("s tur att spela!");
 
 
                 ConsoleUI ui = new ConsoleUI();
