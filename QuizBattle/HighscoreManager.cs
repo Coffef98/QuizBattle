@@ -11,7 +11,7 @@ namespace QuizBattle
         private readonly string filePath = Path.Combine(AppContext.BaseDirectory,"data", "highscores.json");
         private List<HighscoreEntry> entries = new();
         private bool loadFailed = false;
-        public void LoadScores() //--------------------------------------------------------------------------------------------------------------------------
+        public void LoadScores() 
         {
             loadFailed = false;
 
@@ -35,7 +35,7 @@ namespace QuizBattle
                 loadFailed = true;
             }
         }
-        public void SaveResult(HighscoreEntry result) //--------------------------------------------------------------------------------------------------------
+        public void SaveResult(HighscoreEntry result) 
         {
 
             LoadScores();
@@ -65,7 +65,7 @@ namespace QuizBattle
                 Console.WriteLine($"Kunde inte spara resultatet: {ex.Message}");
             }
         }
-        public List<HighscoreEntry> GetTopTen() //---------------------------------------------------------------------------------------------------------------
+        public List<HighscoreEntry> GetTopTen() 
         {
             var sortedEntries = entries
                     .OrderByDescending(entry => entry.Score)
@@ -75,7 +75,7 @@ namespace QuizBattle
 
             return sortedEntries;
         }
-        public void ShowLeaderboard() //--------------------------------------------------------------------------------------------------------------------------
+        public void ShowLeaderboard() 
         {
             LoadScores();
             List<HighscoreEntry> topTen = GetTopTen();
@@ -121,7 +121,7 @@ namespace QuizBattle
             }
         }
 
-        public void TestLoadScores() //------------------------------------------------------------------------------------------------------------------
+        public void TestLoadScores() 
         {
             LoadScores();
 
@@ -131,8 +131,8 @@ namespace QuizBattle
             }
            
 
-            Console.WriteLine($"Antal sparade resultat: {entries.Count}");      // Visar 0 för tillfället så stämmer 
-            Console.WriteLine($"Finns JSON-filen? {File.Exists(filePath)}");   // japp den visar att den finns. den retunerade: true.
+            Console.WriteLine($"Antal sparade resultat: {entries.Count}");      
+            Console.WriteLine($"Finns JSON-filen? {File.Exists(filePath)}");   
         }
     }
 }
