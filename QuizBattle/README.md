@@ -66,3 +66,8 @@ Topplistan sorteras efter högst poäng. Vid lika poäng visas spelaren med fles
 - .NET
 - JSON
 - Git och GitHub
+
+## UML
+
+-Map namn: UML
+-file: image.png
